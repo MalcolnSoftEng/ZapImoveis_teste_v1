@@ -188,7 +188,7 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentMapa = new Intent(Intent.ACTION_VIEW);
                 intentMapa.setData(Uri.parse("geo:0,0?z=14&q="+ imoveis.getEndereco() )); //protocolo geo:0,0
-
+                startActivity(intentMapa);
             }
         });
     }
