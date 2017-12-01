@@ -115,7 +115,7 @@
                         android:textSize="12dp"
                         tools:ignore="ObsoleteLayoutParam" />
                 </LinearLayout>
-                <ImageView
+                <ImageButton
                     android:id="@+id/btnMapa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

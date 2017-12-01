@@ -89,7 +89,7 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
     TextView txtAreaUtil;
 
     @BindView(R.id.btnMapa)
-    ImageView btnMapa;
+    ImageButton btnMapa;
 
     private Usuario mUsuario;
 
