@@ -58,20 +58,24 @@ public class ImoveisHttp {
         List<Imoveis> listaDeImoveis = new ArrayList<>();
         Imoveis imoveis = new Imoveis();
         String teste = "";
+        int qtdeImovFiltro = 0;
         try {
             JSONArray imoveisArray = getJsonArray();
             int acum = 0;
             JSONObject jsonImoveis = null;
-
+            
             // looping through All Imoveis
             for (int i = 0; i < imoveisArray.length(); i++) {
 
                 jsonImoveis = imoveisArray.getJSONObject(i);
 
                 teste = jsonImoveis.getString("PrecoVenda");
+
                 if (Integer.valueOf(teste)< filtro.getValor()) {
+
                     getAtributosJson(imoveis, jsonImoveis);
                     listaDeImoveis.add(imoveis);
+
                 }
             }
 

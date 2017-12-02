@@ -56,7 +56,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
 
     public Filtro mFiltro;
 
-
+    private ListaAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                            txtVInserido.setText(String.valueOf(seekBar.getProgress()));
+                            txtVInserido.setText("R$"+String.valueOf(seekBar.getProgress()));
                     }
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -126,6 +126,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                                 mFiltro.setValor(seekBar.getProgress());
                                 filtro = true;
                                 new ImoveisDownloadTask().execute();
+
                             }
                         });
                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -164,10 +165,9 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
     }
 
     private void atualizarLista() {
-        ListaAdapter adapter = new ListaAdapter(getActivity(), mImoveis);
+        adapter = new ListaAdapter(getActivity(), mImoveis);
         adapter.setAoClicarNoItemListener(this);
         mRecyclerView.setAdapter(adapter);
-
         atualizarQtdeItens();
     }
 
