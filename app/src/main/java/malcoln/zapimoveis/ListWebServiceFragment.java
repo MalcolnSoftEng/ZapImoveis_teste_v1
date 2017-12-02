@@ -91,7 +91,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
 
         btnFiltro.setOnClickListener(new View.OnClickListener() {
 
-            public int progressChangedValue;
+            private int progressChangedValue;
 
             @Override
             public void onClick(View view) {
@@ -101,34 +101,26 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
                 alertDialogBuilder.setView(msgView);
                 alertDialogBuilder.setTitle("Filtre por preço");
+                final SeekBar seekBar = msgView.findViewById(R.id.seekBar);
+                final TextView txtVInserido = msgView.findViewById(R.id.txtValorInserido);
+                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                            txtVInserido.setText(String.valueOf(seekBar.getProgress()));
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
+                });
+
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                
-                                SeekBar seekBar = msgView.findViewById(R.id.seekBar);
-                                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                                    
-                                    @Override
-                                    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                                        progressChangedValue = progress;
-                                    }
 
-                                    @Override
-                                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                                    }
-
-                                    @Override
-                                    public void onStopTrackingTouch(SeekBar seekBar) {
-                                        seekBar.getProgress();
-                                        Toast.makeText(getContext(), "Seek bar progress is :" + seekBar.getProgress(),
-                                                Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                                Toast.makeText(getActivity(), "Valor Máximo do Imóvel :" + seekBar.getProgress(),
+                                Toast.makeText(getActivity(), "Valor :" + seekBar.getProgress(),
                                         Toast.LENGTH_SHORT).show();
                                 mFiltro = new Filtro(seekBar.getProgress());
                                 mFiltro.setValor(seekBar.getProgress());
@@ -143,8 +135,6 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
 
         return view;
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -178,6 +168,10 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
         adapter.setAoClicarNoItemListener(this);
         mRecyclerView.setAdapter(adapter);
 
+        atualizarQtdeItens();
+    }
+
+    private void atualizarQtdeItens() {
         qtde = String.valueOf(ImoveisHttp.retornaQTDE());
         txtQTDE.setText(" "+qtde+ " de " + qtde + " Imoveis Encontrados");
     }

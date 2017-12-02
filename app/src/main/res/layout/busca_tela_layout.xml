@@ -20,6 +20,7 @@
         android:progressDrawable="@drawable/custom_progress"
         android:thumb="@drawable/maozinha_ponteiro"
         android:background="#45517ff2"
+        android:layout_marginTop="30dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <TextView
@@ -38,4 +39,12 @@
         android:layout_below="@+id/seekBar"
         android:layout_centerHorizontal="true"
         android:text="500.000" />
+
+    <TextView
+        android:id="@+id/txtValorInserido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor Inserido"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
