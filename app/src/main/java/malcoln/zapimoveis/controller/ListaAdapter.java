@@ -71,12 +71,12 @@ public class ListaAdapter extends RecyclerView.Adapter<ListaAdapter.ImoveisViewH
     public void onBindViewHolder(ImoveisViewHolder holder, int position) {
         Imoveis imoveis = mImoveis.get(position);
         Picasso.with(mContext).load(imoveis.getUrlImagem()).into(holder.imgImovel);
-        holder.txtTipoImovel.setText(imoveis.getTipoImovel());
+        holder.txtTipoImovel.setText(imoveis.getSubtipoImovel());
         holder.txtEndereco.setText(imoveis.getEndereco());
         holder.txtPreco.setText(imoveis.getPrecoVenda());
-        holder.txtDormitorios.setText("dorm.(s):"+imoveis.getDormitorios());
-        holder.txtSuites.setText(" suíte(s):"+imoveis.getSuites());
-        holder.txtVagas.setText(" vaga(s):"+imoveis.getVagas());
+        holder.txtDormitorios.setText(imoveis.getDormitorios()+"dorm.(s)");
+        holder.txtSuites.setText(imoveis.getSuites()+"suíte(s)");
+        holder.txtVagas.setText(imoveis.getVagas()+"vaga(s)");
         holder.txtAreaUtil.setText(" área util:"+imoveis.getAreaUtil()+"m2");
         holder.txtAreaTotal.setText(" área total:"+imoveis.getAreaTotal()+"m2");
 

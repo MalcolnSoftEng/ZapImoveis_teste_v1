@@ -17,9 +17,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +30,6 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import malcoln.zapimoveis.controller.ImovelAdapter;
-import malcoln.zapimoveis.controller.ListaAdapter;
 import malcoln.zapimoveis.model.Imoveis;
 import malcoln.zapimoveis.model.Usuario;
 import malcoln.zapimoveis.webservice.mensagemHttp;
@@ -67,8 +68,14 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.txtTipoImovelDet)
-    TextView txtTipoImovel;
+    @BindView(R.id.txtSubTipoImovelDet)
+    TextView txtSubTipoImovel;
+
+    @BindView(R.id.txtCodImovel)
+    TextView txtCodImovel;
+
+    @BindView(R.id.txtCodCliente)
+    TextView txtCodCliente;
 
     @BindView(R.id.txtEnderecoDet)
     TextView txtEnderecol;
@@ -90,6 +97,15 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
 
     @BindView(R.id.btnMapa)
     ImageButton btnMapa;
+
+    @BindView(R.id.btnRelativeLayout)
+    RelativeLayout btnRelativeLayout;
+
+    @BindView(R.id.btnContato)
+    Button btnContato;
+
+    @BindView(R.id.txtNomeFantasia)
+    TextView txtNomeFantasia;
 
     private Usuario mUsuario;
 
@@ -134,7 +150,7 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
 
         addBottomDots(0);
 
-        mFabMensagem.setOnClickListener(new View.OnClickListener() {
+        btnContato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -183,11 +199,11 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
             }
         });
 
-        btnMapa.setOnClickListener(new View.OnClickListener() {
+        btnRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intentMapa = new Intent(Intent.ACTION_VIEW);
-                intentMapa.setData(Uri.parse("geo:0,0?z=14&q="+ imoveis.getEndereco() )); //protocolo geo:0,0
+                intentMapa.setData(Uri.parse("geo:0,0?z=14&q="+ imoveis.getEnderecoFormatado())); //protocolo geo:0,0
                 startActivity(intentMapa);
             }
         });
@@ -203,17 +219,21 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
     }
     private void preencheCampos(Imoveis imoveis){
 
-        txtTipoImovel.setText(imoveis.getTipoImovel());
+        txtSubTipoImovel.setText(imoveis.getSubtipoImovel());
         txtEnderecol.setText(imoveis.getEndereco());
         txtPreco.setText(imoveis.getPrecoVenda());
         txtDormitorios.setText(imoveis.getDormitorios());
         txtSuites.setText(imoveis.getSuites());
         txtVagas.setText(imoveis.getVagas());
         txtAreaUtil.setText(imoveis.getAreaUtil());
+        txtCodImovel.setText(imoveis.getCodImovel());
+        txtCodCliente.setText(imoveis.getCodCliente());
+        txtNomeFantasia.setText(imoveis.getNomeFantasia());
     }
 
     private void configurarBarraDeTitulo(String nome) {
         setSupportActionBar(mToolbar);
+       
         if (mAppBar != null){
             if (mAppBar.getLayoutParams() instanceof CoordinatorLayout.LayoutParams){
                 CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) mAppBar.getLayoutParams();
@@ -223,6 +243,7 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (mCollapsingToolbarLayout!=null){
             getSupportActionBar().setDisplayShowTitleEnabled(true);
+
             //getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
             mCollapsingToolbarLayout.setTitle(nome);

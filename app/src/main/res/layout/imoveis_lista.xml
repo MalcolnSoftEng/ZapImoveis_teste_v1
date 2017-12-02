@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/txtEndereco"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="1dp"
                 android:layout_toEndOf="@+id/Preco"
                 android:layout_toRightOf="@+id/Preco"
                 android:fontFamily="sans-serif"

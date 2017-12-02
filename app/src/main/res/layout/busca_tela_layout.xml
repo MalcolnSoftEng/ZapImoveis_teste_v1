@@ -6,7 +6,7 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="min.:R$50.000,00"
+    android:text="R$100.000,00"
     android:id="@+id/textView2"
     android:layout_below="@+id/seekBar"
     android:layout_alignParentLeft="true"
@@ -16,11 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="1000000"
-        android:progress="60"
+        android:progress="500000"
         android:progressDrawable="@drawable/custom_progress"
         android:thumb="@drawable/maozinha_ponteiro"
         android:background="#45517ff2"
-
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <TextView
@@ -31,4 +30,12 @@
         android:layout_below="@+id/seekBar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar"
+        android:layout_centerHorizontal="true"
+        android:text="500.000" />
 </RelativeLayout>

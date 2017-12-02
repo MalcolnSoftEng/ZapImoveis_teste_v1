@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
+
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <!-- include activity_produto_detalhe.xml-->
@@ -81,6 +82,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+
+
                 app:layout_collapseMode="pin"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -109,5 +112,18 @@
 
 
     </android.support.v4.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btnContato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        android:elevation="6dp"
+        android:soundEffectsEnabled="true"
+        android:text="Enviar Contato"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+        app:layout_anchorGravity="bottom"
+        tools:ignore="HardcodedText" />
 
 </android.support.design.widget.CoordinatorLayout>

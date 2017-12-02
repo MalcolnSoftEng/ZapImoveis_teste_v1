@@ -1,9 +1,6 @@
 package malcoln.zapimoveis.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Malcoln on 28/11/2017.
@@ -11,21 +8,41 @@ import java.util.ArrayList;
 
 public class Imoveis implements Serializable{
 
+    private String CodImovel;
+    private String TipoImovel;
+    private String Endereco;
+    private String PrecoVenda;
+    private String Dormitorios;
+    private String Suites;
+    private String Vagas;
+    private String AreaUtil;
+    private String AreaTotal;
+    private String DataAtualizacao;
+    private String NomeFantasia;
 
-    public String CodImovel;
-    public String TipoImovel;
-    public String Endereco;
-    public String PrecoVenda;
-    public String Dormitorios;
-    public String Suites;
-    public String Vagas;
-    public String AreaUtil;
-    public String AreaTotal;
-    public String DataAtualizacao;
-    public String Cliente;
-    public String UrlImagem;
-    public String SubTipoOferta;
-    public String SubtipoImovel;
+    public String getEnderecoFormatado() {
+        return EnderecoFormatado;
+    }
+
+    public void setEnderecoFormatado(String enderecoFormatado) {
+        EnderecoFormatado = enderecoFormatado;
+    }
+
+    private String EnderecoFormatado;
+
+
+    public String getCodCliente() {
+        return CodCliente;
+    }
+
+    public void setCodCliente(String codCliente) {
+        CodCliente = codCliente;
+    }
+
+    private String CodCliente;
+    private String UrlImagem;
+    private String SubTipoOferta;
+    private String SubtipoImovel;
 
 
     public String getCodImovel() {
@@ -108,12 +125,12 @@ public class Imoveis implements Serializable{
         DataAtualizacao = dataAtualizacao;
     }
 
-    public String getCliente() {
-        return Cliente;
+    public String getNomeFantasia() {
+        return NomeFantasia;
     }
 
-    public void setCliente(String cliente) {
-        Cliente = cliente;
+    public void setNomeFantasia(String nomeFantasia) {
+        NomeFantasia = nomeFantasia;
     }
 
     public String getUrlImagem() {

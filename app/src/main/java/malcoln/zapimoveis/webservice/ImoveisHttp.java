@@ -12,11 +12,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import malcoln.zapimoveis.ListWebServiceFragment;
 import malcoln.zapimoveis.model.Filtro;
 import malcoln.zapimoveis.model.Imoveis;
 
@@ -44,27 +42,8 @@ public class ImoveisHttp {
                 JSONObject jsonImoveis = imoveisArray.getJSONObject(i);
 
                 Imoveis imoveis = new Imoveis();
-                imoveis.setCodImovel(jsonImoveis.getString("CodImovel"));
-                imoveis.setTipoImovel(jsonImoveis.getString("TipoImovel"));
-                imoveis.setPrecoVenda(jsonImoveis.getString("PrecoVenda"));
-                imoveis.setDormitorios(jsonImoveis.getString("Dormitorios"));
-                imoveis.setSuites(jsonImoveis.getString("Suites"));
-                imoveis.setVagas(jsonImoveis.getString("Vagas"));
-                imoveis.setAreaUtil(jsonImoveis.getString("AreaUtil"));
-                imoveis.setAreaTotal(jsonImoveis.getString("AreaTotal"));
+                getAtributosJson(imoveis, jsonImoveis);
 
-                //Pega Objeto "Endereco" e valida quantidade de atributos do objeto, pois o primeiro item tem 6 atributos
-                JSONObject jsonObjEndereco = jsonImoveis.getJSONObject("Endereco");
-                if (jsonObjEndereco.length()<8){
-                    imoveis.setEndereco(jsonObjEndereco.getString("Numero")+", Cep: "+jsonObjEndereco.getString("CEP")
-                            +", Bairro: "+jsonObjEndereco.getString("Bairro")+", Cidade: "+jsonObjEndereco.getString("Cidade"));
-                } else {
-                    imoveis.setEndereco(jsonObjEndereco.getString("Logradouro")+","+jsonObjEndereco.getString("Numero")
-                            +" - "+jsonObjEndereco.getString("Complemento")+", "+jsonObjEndereco.getString("Bairro")+", "+jsonObjEndereco.getString("Cidade"));
-                }
-
-                imoveis.setUrlImagem(jsonImoveis.getString("UrlImagem"));
-                imoveis.setSubTipoOferta(jsonImoveis.getString("SubTipoOferta"));
                 listaDeImoveis.add(imoveis);
                 Log.e("SAIDA", "Lista: " + listaDeImoveis);
                 QTDE_IMOVEIS = imoveisArray.length();
@@ -78,8 +57,6 @@ public class ImoveisHttp {
     public static List<Imoveis> obterImoveisPorPreco(Filtro filtro){
         List<Imoveis> listaDeImoveis = new ArrayList<>();
         Imoveis imoveis = new Imoveis();
-
-
         String teste = "";
         try {
             JSONArray imoveisArray = getJsonArray();
@@ -91,38 +68,15 @@ public class ImoveisHttp {
 
                 jsonImoveis = imoveisArray.getJSONObject(i);
 
-                //filtroPreco[i] = Integer.parseInt(jsonImoveis.getString("PrecoVenda"));
                 teste = jsonImoveis.getString("PrecoVenda");
                 if (Integer.valueOf(teste)< filtro.getValor()) {
-                    imoveis.setCodImovel(jsonImoveis.getString("CodImovel"));
-                    imoveis.setTipoImovel(jsonImoveis.getString("TipoImovel"));
-                    imoveis.setPrecoVenda(jsonImoveis.getString("PrecoVenda"));
-                    imoveis.setDormitorios(jsonImoveis.getString("Dormitorios"));
-                    imoveis.setSuites(jsonImoveis.getString("Suites"));
-                    imoveis.setVagas(jsonImoveis.getString("Vagas"));
-                    imoveis.setAreaUtil(jsonImoveis.getString("AreaUtil"));
-                    imoveis.setAreaTotal(jsonImoveis.getString("AreaTotal"));
-
-                    //Pega Objeto "Endereco" e valida quantidade de atributos do objeto, pois o primeiro item tem 6 atributos
-                    JSONObject jsonObjEndereco = jsonImoveis.getJSONObject("Endereco");
-                    if (jsonObjEndereco.length() < 8) {
-                        imoveis.setEndereco(jsonObjEndereco.getString("Numero") + ", Cep: " + jsonObjEndereco.getString("CEP")
-                                + ", Bairro: " + jsonObjEndereco.getString("Bairro") + ", Cidade: " + jsonObjEndereco.getString("Cidade"));
-                    } else {
-                        imoveis.setEndereco(jsonObjEndereco.getString("Logradouro") + "," + jsonObjEndereco.getString("Numero")
-                                + " - " + jsonObjEndereco.getString("Complemento") + ", " + jsonObjEndereco.getString("Bairro") + ", " + jsonObjEndereco.getString("Cidade"));
-                    }
-
-                    imoveis.setUrlImagem(jsonImoveis.getString("UrlImagem"));
-                    imoveis.setSubTipoOferta(jsonImoveis.getString("SubTipoOferta"));
-
+                    getAtributosJson(imoveis, jsonImoveis);
                     listaDeImoveis.add(imoveis);
-                    QTDE_IMOVEIS = listaDeImoveis.size();
                 }
             }
 
-
-                Log.e("SAIDA", "Lista: " + listaDeImoveis);
+            QTDE_IMOVEIS = listaDeImoveis.size();
+            Log.e("SAIDA", "Lista: " + listaDeImoveis);
             Log.e("TESTE FILTRO"," valor :" + filtro.getValor());
             
         } catch (Exception e){
@@ -130,6 +84,43 @@ public class ImoveisHttp {
         }
 
         return listaDeImoveis;
+    }
+
+    private static void getAtributosJson(Imoveis imoveis, JSONObject jsonImoveis) throws JSONException {
+
+        imoveis.setCodImovel(jsonImoveis.getString("CodImovel"));
+        imoveis.setTipoImovel(jsonImoveis.getString("TipoImovel"));
+        imoveis.setPrecoVenda(jsonImoveis.getString("PrecoVenda"));
+        imoveis.setDormitorios(jsonImoveis.getString("Dormitorios"));
+        imoveis.setSuites(jsonImoveis.getString("Suites"));
+        imoveis.setVagas(jsonImoveis.getString("Vagas"));
+        imoveis.setAreaUtil(jsonImoveis.getString("AreaUtil"));
+        imoveis.setAreaTotal(jsonImoveis.getString("AreaTotal"));
+        imoveis.setSubtipoImovel(jsonImoveis.getString("SubtipoImovel"));
+
+        //Pega Objeto "Cliente" e a String/Atributos
+        JSONObject jsonObjCliente = jsonImoveis.getJSONObject("Cliente");
+        imoveis.setNomeFantasia(jsonObjCliente.getString("NomeFantasia"));
+        imoveis.setCodCliente(jsonObjCliente.getString("CodCliente"));
+
+        //Pega Objeto "Endereco" e valida quantidade de atributos do objeto, pois o primeiro item tem 6 atributos
+        JSONObject jsonObjEndereco = jsonImoveis.getJSONObject("Endereco");
+        if (jsonObjEndereco.length() < 8) {
+            imoveis.setEndereco(jsonObjEndereco.getString("Numero") + ", Cep: " + jsonObjEndereco.getString("CEP")
+                    + ", Bairro: " + jsonObjEndereco.getString("Bairro") + ", Cidade: " + jsonObjEndereco.getString("Cidade"));
+
+            imoveis.setEnderecoFormatado(jsonObjEndereco.getString("Numero") + ", Cep: " + jsonObjEndereco.getString("CEP")
+                    + ", Bairro: " + jsonObjEndereco.getString("Bairro") + ", Cidade: " + jsonObjEndereco.getString("Cidade"));
+        } else {
+            imoveis.setEndereco(jsonObjEndereco.getString("Logradouro") + "," + jsonObjEndereco.getString("Numero")
+                    + " - " + jsonObjEndereco.getString("Complemento") + ", " + jsonObjEndereco.getString("Bairro") + ", " + jsonObjEndereco.getString("Cidade"));
+
+            imoveis.setEnderecoFormatado(jsonObjEndereco.getString("Logradouro") + "," +jsonObjEndereco.getString("Numero") + ", Cep: " + jsonObjEndereco.getString("CEP")
+                    + ", Bairro: " + jsonObjEndereco.getString("Bairro") + ", Cidade: " + jsonObjEndereco.getString("Cidade"));
+        }
+
+        imoveis.setUrlImagem(jsonImoveis.getString("UrlImagem"));
+        imoveis.setSubTipoOferta(jsonImoveis.getString("SubTipoOferta"));
     }
 
     private static JSONArray getJsonArray() throws IOException, JSONException {
