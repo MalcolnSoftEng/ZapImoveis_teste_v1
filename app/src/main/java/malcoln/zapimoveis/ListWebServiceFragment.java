@@ -11,10 +11,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +47,8 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
     @BindView(R.id.btnFiltro)
     Button btnFiltro;
 
-    public String qtde;
+    public String qtdeFiltro;
+    public String qtdeTotal;
 
     Unbinder unbinder;
 
@@ -98,15 +101,89 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 
                 LayoutInflater layoutInflater = LayoutInflater.from(getContext());
                 final View msgView = layoutInflater.inflate(R.layout.busca_tela_layout,null);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
                 alertDialogBuilder.setView(msgView);
-                alertDialogBuilder.setTitle("Filtre por preço");
-                final SeekBar seekBar = msgView.findViewById(R.id.seekBar);
+                alertDialogBuilder.setTitle("Filtre por:");
+
+                final LinearLayout txtLinearLayout1_1 = msgView.findViewById(R.id.txtLinearLayout1_1);
+                final LinearLayout txtLinearLayout2_1 = msgView.findViewById(R.id.txtLinearLayout2_1);
+                final LinearLayout txtLinearLayout3_1 = msgView.findViewById(R.id.txtLinearLayout3_1);
+                final LinearLayout txtLinearLayout4_1 = msgView.findViewById(R.id.txtLinearLayout4_1);
+
+                boolean click=false;
                 final TextView txtVInserido = msgView.findViewById(R.id.txtValorInserido);
+                txtVInserido.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        txtLinearLayout1_1.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                final TextView txtQTDEDorm = msgView.findViewById(R.id.txtQTDEDorm);
+                txtQTDEDorm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        txtLinearLayout2_1.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                final TextView txtQTDESuite = msgView.findViewById(R.id.txtQTDESuite);
+                txtQTDESuite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        txtLinearLayout3_1.setVisibility(View.VISIBLE);
+                        Log.e("TESTE","CLICK QTDE SUITE");
+                    }
+                });
+                final TextView txtQTDEVagas = msgView.findViewById(R.id.txtQTDEVagas);
+                txtQTDEVagas.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        txtLinearLayout4_1.setVisibility(View.VISIBLE);
+                        Log.e("TESTE","CLICK QTDE VAGAS");
+                    }
+                });
+
+                final SeekBar seekBar = msgView.findViewById(R.id.seekBar);
                 seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                            txtVInserido.setText("R$"+String.valueOf(seekBar.getProgress()));
+                        txtVInserido.setText("ATÉ "+String.valueOf(seekBar.getProgress()+" REAIS"));
+                        }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
+                });
+                final SeekBar seekBarDorm = msgView.findViewById(R.id.seekBarDorm);
+                seekBarDorm.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        txtQTDEDorm.setText(String.valueOf(seekBarDorm.getProgress())+" QUARTOS");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
+                });
+
+                final SeekBar seekBarSuite = msgView.findViewById(R.id.seekBarSuite);
+                seekBarSuite.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        txtQTDESuite.setText(String.valueOf(seekBarSuite.getProgress())+" SUÍTES");
+                    }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
+                });
+
+                final SeekBar seekBarVagas = msgView.findViewById(R.id.seekBarVagas);
+                seekBarVagas.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        txtQTDEVagas.setText(String.valueOf(seekBarVagas.getProgress())+" VAGAS");
                     }
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -120,15 +197,25 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                Toast.makeText(getActivity(), "Valor :" + seekBar.getProgress(),
-                                        Toast.LENGTH_SHORT).show();
-                                mFiltro = new Filtro(seekBar.getProgress());
-                                mFiltro.setValor(seekBar.getProgress());
+                                Toast.makeText(getActivity(), "Valor R$" + seekBar.getProgress()+"\n"
+                                                + " Dormitórios:"+ seekBarDorm.getProgress()+"\n"
+                                                + " Suítes:"+ seekBarSuite.getProgress()+"\n"
+                                                + " Vagas:"+ seekBarVagas.getProgress(),
+                                        Toast.LENGTH_LONG).show();
+                                mFiltro = new Filtro(seekBar.getProgress(),seekBarDorm.getProgress(),
+                                        seekBarSuite.getProgress(),seekBarVagas.getProgress());
+                                mFiltro.setValor(seekBar.getProgress()+seekBarDorm.getProgress()
+                                        +seekBarSuite.getProgress()+seekBarVagas.getProgress());
                                 filtro = true;
                                 new ImoveisDownloadTask().execute();
-
                             }
-                        });
+                        })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
@@ -172,10 +259,14 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
     }
 
     private void atualizarQtdeItens() {
-        qtde = String.valueOf(ImoveisHttp.retornaQTDE());
-        txtQTDE.setText(" "+qtde+ " de " + qtde + " Imoveis Encontrados");
+        qtdeTotal = String.valueOf(ImoveisHttp.retornaQTDETotal());
+        qtdeFiltro = String.valueOf(ImoveisHttp.retornaQTDEfILTRO());
+        if (qtdeFiltro.equals("0")|| filtro==false){
+            txtQTDE.setText(" "+ qtdeTotal + " de " + qtdeTotal + " Imoveis Encontrados");
+        }else{
+            txtQTDE.setText(" "+ qtdeFiltro + " de " + qtdeTotal + " Imoveis Encontrados");
+        }
     }
-
 
     public void exibirProgresso(){
         mSwipe.post(new Runnable() {
@@ -202,7 +293,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
 
             }else{
                 valor = ImoveisHttp.obterImoveisPorPreco(mFiltro);
-                filtro=false;
+
             }
             return valor;
         }

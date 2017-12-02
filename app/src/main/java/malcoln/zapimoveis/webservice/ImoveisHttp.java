@@ -25,7 +25,9 @@ import malcoln.zapimoveis.model.Imoveis;
 public class ImoveisHttp {
     public static final String BASE_URL ="http://demo4573903.mockable.io/imoveis";
 
-    public static int QTDE_IMOVEIS = 0;
+    public static int QTDE_IMOV_FILTRADOS = 0;
+
+    private static int QTDE_IMV_TOTAL = 0;
 
     public static int[] filtroPreco = new int[0];
 
@@ -46,7 +48,7 @@ public class ImoveisHttp {
 
                 listaDeImoveis.add(imoveis);
                 Log.e("SAIDA", "Lista: " + listaDeImoveis);
-                QTDE_IMOVEIS = imoveisArray.length();
+                QTDE_IMV_TOTAL = imoveisArray.length();
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -56,30 +58,34 @@ public class ImoveisHttp {
 
     public static List<Imoveis> obterImoveisPorPreco(Filtro filtro){
         List<Imoveis> listaDeImoveis = new ArrayList<>();
-        Imoveis imoveis = new Imoveis();
+
         String teste = "";
         int qtdeImovFiltro = 0;
         try {
             JSONArray imoveisArray = getJsonArray();
             int acum = 0;
             JSONObject jsonImoveis = null;
-            
-            // looping through All Imoveis
+
             for (int i = 0; i < imoveisArray.length(); i++) {
 
                 jsonImoveis = imoveisArray.getJSONObject(i);
+                Imoveis imoveis = new Imoveis();
+                int preco = Integer.valueOf(jsonImoveis.getString("PrecoVenda"));
+                int dorm = Integer.valueOf(jsonImoveis.getString("Dormitorios"));
+                int suites = Integer.valueOf(jsonImoveis.getString("Suites"));
+                int vagas = Integer.valueOf(jsonImoveis.getString("Vagas"));
 
-                teste = jsonImoveis.getString("PrecoVenda");
-
-                if (Integer.valueOf(teste)< filtro.getValor()) {
-
+                if (preco<filtro.getValor() && dorm<=filtro.getQuantDormitorios()
+                        && suites<=filtro.getQuantSuites() && vagas<=filtro.getQuantVagas() )
+                {
                     getAtributosJson(imoveis, jsonImoveis);
                     listaDeImoveis.add(imoveis);
-
                 }
+                Log.e("SAIDA", "Lista: " + listaDeImoveis);
+                QTDE_IMOV_FILTRADOS = imoveisArray.length();
             }
 
-            QTDE_IMOVEIS = listaDeImoveis.size();
+            QTDE_IMOV_FILTRADOS = listaDeImoveis.size();
             Log.e("SAIDA", "Lista: " + listaDeImoveis);
             Log.e("TESTE FILTRO"," valor :" + filtro.getValor());
             
@@ -127,6 +133,7 @@ public class ImoveisHttp {
         imoveis.setSubTipoOferta(jsonImoveis.getString("SubTipoOferta"));
     }
 
+
     private static JSONArray getJsonArray() throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient();
         client.setReadTimeout(5, TimeUnit.SECONDS);
@@ -145,10 +152,13 @@ public class ImoveisHttp {
         return jsonObj.getJSONArray("Imoveis");
     }
 
-    public static int retornaQTDE(){
+    public static int retornaQTDEfILTRO(){
 
-        return QTDE_IMOVEIS ;
+        return QTDE_IMOV_FILTRADOS;
     }
+    public static int retornaQTDETotal(){
 
+        return QTDE_IMV_TOTAL;
+    }
 }
 
