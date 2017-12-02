@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:text="teste"
+        android:text="nenhum móvel encontrado"
         android:id="@+id/txtQTDE" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -24,13 +24,14 @@
 
         <Button
             android:id="@+id/btnFiltro"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_alignEnd="@+id/txtQTDE"
             android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/txtQTDE"
-            android:text="Filtro Preço" />
+            android:background="#278df4"
+            android:textColor="#fff"
+            android:text="Filtrar" />
     </RelativeLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

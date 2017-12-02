@@ -115,7 +115,11 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 txtVInserido.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        txtLinearLayout1_1.setVisibility(View.VISIBLE);
+                        if (txtLinearLayout1_1.getVisibility()!=View.VISIBLE) {
+                            txtLinearLayout1_1.setVisibility(View.VISIBLE);
+                        }else{
+                            txtLinearLayout1_1.setVisibility(View.GONE);
+                        }
                     }
                 });
 
@@ -123,7 +127,11 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 txtQTDEDorm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        txtLinearLayout2_1.setVisibility(View.VISIBLE);
+                        if (txtLinearLayout2_1.getVisibility()!=View.VISIBLE) {
+                            txtLinearLayout2_1.setVisibility(View.VISIBLE);
+                        }else{
+                            txtLinearLayout2_1.setVisibility(View.GONE);
+                        }
                     }
                 });
 
@@ -131,16 +139,22 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 txtQTDESuite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        txtLinearLayout3_1.setVisibility(View.VISIBLE);
-                        Log.e("TESTE","CLICK QTDE SUITE");
+                        if (txtLinearLayout3_1.getVisibility()!=View.VISIBLE){
+                            txtLinearLayout3_1.setVisibility(View.VISIBLE);
+                        }else{
+                            txtLinearLayout3_1.setVisibility(View.GONE);
+                        }
                     }
                 });
                 final TextView txtQTDEVagas = msgView.findViewById(R.id.txtQTDEVagas);
                 txtQTDEVagas.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        txtLinearLayout4_1.setVisibility(View.VISIBLE);
-                        Log.e("TESTE","CLICK QTDE VAGAS");
+                        if (txtLinearLayout4_1.getVisibility()!=View.VISIBLE) {
+                            txtLinearLayout4_1.setVisibility(View.VISIBLE);
+                        }else {
+                            txtLinearLayout4_1.setVisibility(View.GONE);
+                        }
                     }
                 });
 
