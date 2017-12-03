@@ -34,6 +34,7 @@ import malcoln.zapimoveis.controller.ListaAdapter;
 import malcoln.zapimoveis.model.Filtro;
 import malcoln.zapimoveis.model.Imoveis;
 
+import malcoln.zapimoveis.util.IsOnline;
 import malcoln.zapimoveis.webservice.ImoveisHttp;
 
 import io.codetail.animation.ViewAnimationUtils;
@@ -125,7 +126,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                                 ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
                         myView.setVisibility(View.VISIBLE);
                         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                        animator.setDuration(1500);
+                        animator.setDuration(1000);
                         animator.start();
                     }
                 });
@@ -284,6 +285,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 mTask.execute();
             } else if (mTask.getStatus() == AsyncTask.Status.RUNNING){
                 exibirProgresso();
+                new IsOnline(getContext()).isOn();
             }
         } else {
             atualizarLista();
@@ -302,6 +304,7 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
         adapter.setAoClicarNoItemListener(this);
         mRecyclerView.setAdapter(adapter);
         atualizarQtdeItens();
+        new IsOnline(getContext()).isOn();
     }
 
     private void atualizarQtdeItens() {
@@ -339,7 +342,6 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
 
             }else{
                 valor = ImoveisHttp.obterImoveisPorPreco(mFiltro);
-
             }
             return valor;
         }

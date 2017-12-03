@@ -130,12 +130,24 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
         btnReturn = (ImageButton)findViewById(R.id.imageButtonLeft);
         btnGo = (ImageButton) findViewById(R.id.imageButtonRight);
 
-        mImovViewPagAdpter = new ImovelAdapter(this,layout,null);
+        mImovViewPagAdpter = new ImovelAdapter(this,layout,imoveis.getFotos_imoveis());
 
         viewPager.setAdapter(mImovViewPagAdpter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
         btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int viewAtual = getItem(+1);
+                int viewAnterior = getItem(-1);
+                if (viewAtual < mImovViewPagAdpter.getCount()){
+                    viewPager.setCurrentItem(viewAtual);
+                } else {
+                    viewPager.setCurrentItem(viewAnterior);
+                }
+            }
+        });
+        btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int viewAtual = getItem(+1);

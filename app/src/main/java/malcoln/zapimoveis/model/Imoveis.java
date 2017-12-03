@@ -20,6 +20,17 @@ public class Imoveis implements Serializable{
     private String DataAtualizacao;
     private String NomeFantasia;
 
+    //MOCKANDO FOTOS IMOVEIS
+    private String[] fotos_imoveis;
+
+    public String[] getFotos_imoveis() {
+        return fotos_imoveis;
+    }
+
+    public void setFotos_imoveis(String[] fotos_imoveis) {
+        this.fotos_imoveis = fotos_imoveis;
+    }
+
     public String getEnderecoFormatado() {
         return EnderecoFormatado;
     }

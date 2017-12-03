@@ -19,15 +19,13 @@ import malcoln.zapimoveis.model.Imoveis;
 public class ImovelAdapter extends PagerAdapter {
 
     private Context mContext;
-    private static final String PRE_LINK = "http://femenina.syte.com.br/css/produtos/";
+
     private LayoutInflater layoutInflater; //intancia que será carregada/inflada nas Views de Array de Views -> int[] layout
     int[] layout = new int[]{R.layout.activity_inicial,
             R.layout.activity_inicial2, R.layout.activity_inicial3, R.layout.activity_inicial4,R.layout.activity_inicial5};
-    private String arrayFotos;
+    private String[] arrayFotos;
 
-
-
-    public ImovelAdapter(Context mContext, int[] layout, String arrayFotos ){ //método construtor assinado para parametros do contexto a ser
+    public ImovelAdapter(Context mContext, int[] layout, String[] arrayFotos ){ //método construtor assinado para parametros do contexto a ser
         // chamado e objeto/componente que será carregado
         this.mContext = mContext;
         this.layout = layout;
@@ -41,10 +39,10 @@ public class ImovelAdapter extends PagerAdapter {
         layoutInflater= LayoutInflater.from(mContext);
         ViewGroup view = (ViewGroup) layoutInflater.inflate(layout[position], container,false);
         container.addView(view);
-        //String fotoCarregada = arrayFotos[position];
+        String fotoCarregada = arrayFotos[position];
         ImageView imageUpLoadWS = (ImageView) view.findViewById(R.id.imageUpLoadWS);
 
-        Picasso.with(mContext).load(imoveis.getUrlImagem()).into(imageUpLoadWS);
+        Picasso.with(mContext).load(fotoCarregada).into(imageUpLoadWS);
 
         return view;
     }

@@ -135,6 +135,13 @@ public class ImoveisHttp {
 
         imoveis.setUrlImagem(jsonImoveis.getString("UrlImagem"));
         imoveis.setSubTipoOferta(jsonImoveis.getString("SubTipoOferta"));
+
+        //MOCKANDO VIEW PAGER DE IMAGENS DE IMOVEIS
+        String linkCapa = jsonImoveis.getString("UrlImagem");
+        String linkZap = "https://i.ytimg.com/vi/sUhq5aZlX40/maxresdefault.jpg";
+        String link2Zap = "http://revistaimoveis.zap.com.br/imoveis/2012/05/iPhone_.png";
+        String[] arrayFotos = new String[]{linkCapa,linkZap,link2Zap,linkCapa,link2Zap};
+        imoveis.setFotos_imoveis(arrayFotos);
     }
 
 
