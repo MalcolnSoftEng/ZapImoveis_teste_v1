@@ -1,26 +1,12 @@
 package malcoln.zapimoveis;
 
-import android.app.AlertDialog;
-import android.graphics.Color;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
-
-import malcoln.zapimoveis.controller.ListaAdapter;
-import malcoln.zapimoveis.model.Imoveis;
-import malcoln.zapimoveis.webservice.ImoveisHttp;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -34,8 +20,6 @@ public class MainActivity extends AppCompatActivity  {
         Toolbar toolbar = (Toolbar)findViewById(R.id.mToolbar);
 
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override
@@ -43,5 +27,22 @@ public class MainActivity extends AppCompatActivity  {
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        statusConexao();
+    }
 
+
+    public boolean isOnline(){
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return manager.getActiveNetworkInfo() != null &&
+                manager.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+    public void statusConexao(){
+        if (!isOnline()){
+            Toast.makeText(getBaseContext(),"Sem conexao",Toast.LENGTH_LONG).show();
+        }
+    }
 }

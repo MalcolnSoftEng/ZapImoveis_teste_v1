@@ -1,5 +1,7 @@
 package malcoln.zapimoveis;
 
+import android.animation.Animator;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +16,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -29,7 +33,10 @@ import butterknife.Unbinder;
 import malcoln.zapimoveis.controller.ListaAdapter;
 import malcoln.zapimoveis.model.Filtro;
 import malcoln.zapimoveis.model.Imoveis;
+
 import malcoln.zapimoveis.webservice.ImoveisHttp;
+
+import io.codetail.animation.ViewAnimationUtils;
 
 /**
  * Created by Malcoln on 28/11/2017.
@@ -101,6 +108,29 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 
                 LayoutInflater layoutInflater = LayoutInflater.from(getContext());
                 final View msgView = layoutInflater.inflate(R.layout.busca_tela_layout,null);
+
+                final View myView = msgView.findViewById(R.id.reveal);
+                //The runnable will run after the view's creation
+                myView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // get the center for the clipping circle
+                        int cx = (myView.getLeft() + myView.getRight()) / 2;
+                        int cy = (myView.getTop() + myView.getBottom()) / 2;
+
+                        // get the final radius for the clipping circle
+                        int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
+
+                        Animator animator =
+                                ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+                        myView.setVisibility(View.VISIBLE);
+                        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                        animator.setDuration(1500);
+                        animator.start();
+                    }
+                });
+
+
                 final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
                 alertDialogBuilder.setView(msgView);
                 alertDialogBuilder.setTitle("Filtre por:");
@@ -115,8 +145,10 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
                 txtVInserido.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         if (txtLinearLayout1_1.getVisibility()!=View.VISIBLE) {
                             txtLinearLayout1_1.setVisibility(View.VISIBLE);
+
                         }else{
                             txtLinearLayout1_1.setVisibility(View.GONE);
                         }
@@ -292,12 +324,12 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
     }
 
 
+
     private class ImoveisDownloadTask extends AsyncTask<Void, Void, List<Imoveis>> {
 
         @Override
         protected void onPreExecute() {
-            super.onPreExecute(); //verificar conexão e criar alert caso não tenha
-            exibirProgresso();
+            super.onPreExecute();
         }
         @Override
         protected List<Imoveis> doInBackground(Void... voids) {

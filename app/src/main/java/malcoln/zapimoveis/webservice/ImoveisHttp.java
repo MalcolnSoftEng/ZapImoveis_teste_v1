@@ -1,6 +1,10 @@
 package malcoln.zapimoveis.webservice;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -75,8 +79,8 @@ public class ImoveisHttp {
                 int suites = Integer.valueOf(jsonImoveis.getString("Suites"));
                 int vagas = Integer.valueOf(jsonImoveis.getString("Vagas"));
 
-                if (preco<filtro.getValor() && dorm<=filtro.getQuantDormitorios()
-                        && suites<=filtro.getQuantSuites() && vagas<=filtro.getQuantVagas() )
+                if (preco<=filtro.getValor() || (dorm==filtro.getQuantDormitorios()
+                        && suites==filtro.getQuantSuites() && vagas==filtro.getQuantVagas()) )
                 {
                     getAtributosJson(imoveis, jsonImoveis);
                     listaDeImoveis.add(imoveis);
@@ -160,5 +164,7 @@ public class ImoveisHttp {
 
         return QTDE_IMV_TOTAL;
     }
+
+
 }
 
