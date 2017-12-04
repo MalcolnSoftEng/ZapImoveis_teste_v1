@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#60d6d4d4"
     android:orientation="vertical"
     android:padding="8dp">
 
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,8 +30,8 @@
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@android:drawable/ic_input_add"
-                    android:layout_centerVertical="true" />
+                    app:srcCompat="@drawable/ic_action_money"
+                    android:background="@drawable/background_icons" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -82,10 +83,9 @@
                 android:orientation="horizontal">
                 <ImageView
                     android:id="@+id/imgViewInfo"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#000"
+                    android:background="@drawable/background_icons"
                     android:layout_gravity="center"
                     app:srcCompat="@android:drawable/ic_dialog_info" />
                 <LinearLayout
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="#000"
+                    android:background="@drawable/background_icons"
                     android:elevation="8dp"
                     android:src="@android:drawable/ic_dialog_map" />
 
@@ -152,7 +152,7 @@
                     android:id="@+id/imgView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#000"
+                    android:background="@drawable/background_icons"
                     android:layout_gravity="center"
                     app:srcCompat="@android:drawable/ic_dialog_info" />
 
@@ -271,7 +271,7 @@
                     android:id="@+id/imgViewDescr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#000"
+                    android:background="@drawable/background_icons"
                     app:srcCompat="@android:drawable/ic_dialog_info" />
 
                 <LinearLayout
@@ -307,13 +307,14 @@
             android:id="@+id/btnRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:background="@drawable/background_icons"
             android:orientation="vertical"
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:background="#79e1ff"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:background="@drawable/background_circle"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                  />
@@ -360,7 +361,7 @@
                     android:id="@+id/imgViewCarac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#000"
+                    android:background="@drawable/background_icons"
                     app:srcCompat="@android:drawable/ic_dialog_info" />
 
                 <LinearLayout
@@ -406,7 +407,7 @@
                     android:id="@+id/imgViewDadosAnunciante"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#000"
+                    android:background="@drawable/background_icons"
                     app:srcCompat="@android:drawable/ic_dialog_info" />
 
                 <LinearLayout
@@ -475,8 +476,6 @@
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
         android:layout_height="40dp" />
-
-
 
 </LinearLayout>
 

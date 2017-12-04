@@ -59,23 +59,23 @@
 
                 <ImageButton
                     android:id="@+id/imageButtonLeft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:rotation="0"
-                    android:src="@android:drawable/ic_media_rew" />
+                    android:background="@drawable/ic_action_arrow" />
 
                 <ImageButton
                     android:id="@+id/imageButtonRight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@+id/imageButtonLeft"
-                    android:rotation="0"
-                    android:src="@android:drawable/ic_media_ff" />
+                    android:rotation="180"
+                    android:background="@drawable/ic_action_arrow" />
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@android:drawable/stat_notify_chat"
+        android:src="@drawable/ic_action_star"
         app:elevation="6dp"
         app:fabSize="normal"
         app:layout_anchor="@id/appBar"
@@ -118,10 +118,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/background_circle"
         android:elevation="6dp"
         android:soundEffectsEnabled="true"
-        android:text="Enviar Contato"
+        android:text="CONTATAR ANUNCIANTE"
         android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
         app:layout_anchorGravity="bottom"
         tools:ignore="HardcodedText" />
