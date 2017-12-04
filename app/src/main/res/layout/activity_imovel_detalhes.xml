@@ -18,9 +18,9 @@
             android:id="@+id/collapseToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:contentScrim="@color/colorTransparente"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true">
 
             <!-- include activity_produto_detalhe.xml-->
             <ImageView
@@ -50,17 +50,11 @@
                     android:layout_marginBottom="@dimen/dots_margin_bottom"
                     android:gravity="center"
                     android:orientation="horizontal"></LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:alpha=".5"
-                    android:layout_above="@id/layoutDots"
-                    android:background="@android:color/white" />
 
                 <ImageButton
                     android:id="@+id/imageButtonLeft"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
@@ -69,8 +63,8 @@
 
                 <ImageButton
                     android:id="@+id/imageButtonRight"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@+id/imageButtonLeft"
@@ -82,8 +76,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-
-
+                app:titleTextColor="@color/colorLightMalcoln"
+                android:titleTextColor="@color/colorLightMalcoln"
                 app:layout_collapseMode="pin"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -118,6 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/background_circle"
         android:elevation="6dp"
         android:soundEffectsEnabled="true"

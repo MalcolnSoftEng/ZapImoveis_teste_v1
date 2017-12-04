@@ -103,8 +103,6 @@ public class ListWebServiceFragment extends Fragment implements ListaAdapter.AoC
 
         btnFiltro.setOnClickListener(new View.OnClickListener() {
 
-            private int progressChangedValue;
-
             @Override
             public void onClick(View view) {
                 

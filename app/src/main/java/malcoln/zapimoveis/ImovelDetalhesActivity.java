@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.AppBarLayout;
@@ -13,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -257,8 +261,12 @@ public class ImovelDetalhesActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
 
             //getSupportActionBar().setIcon(R.drawable.ic_launcher);
-
             mCollapsingToolbarLayout.setTitle(nome);
+            //setting the color of Title
+            mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.white));
+            mCollapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(android.R.color.white));
+            Drawable navIcon =  mToolbar.getNavigationIcon();
+            navIcon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         } else {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
